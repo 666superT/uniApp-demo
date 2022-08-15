@@ -13,7 +13,7 @@ export const http = ({url, method, data}) => {
 				appId
 			},
 			success: (res => {
-				resolve(res)
+				resolve(res.data)
 			}),
 			fail: (err => {
 				reject(err)

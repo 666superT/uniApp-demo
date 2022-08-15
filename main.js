@@ -21,5 +21,3 @@ export function createApp() {
 // #endif
 
 import 'animate.css'
-
-import {http} from '@/utils/request.js'

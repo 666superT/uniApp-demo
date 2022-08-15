@@ -7,4 +7,8 @@ function getIndex(){
 function getCoupon(){
 	return http({url:'/coupon'})
 }
-export {getIndex,getCoupon}
+
+function getGroup(params){
+	return http({url:'/group',data:params})
+}
+export {getIndex,getCoupon,getGroup}
