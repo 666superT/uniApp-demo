@@ -23,4 +23,3 @@ export function createApp() {
 import 'animate.css'
 
 import {http} from '@/utils/request.js'
-Vue.prototype.$http = http

@@ -4,3 +4,7 @@
 .text-main{
 	color: rgb(92, 204, 132);
 }
+
+html,body,.container{
+	height: 100%;
+}
