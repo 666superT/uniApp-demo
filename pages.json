@@ -5,20 +5,35 @@
 			"style": {
 				"app-plus": {
 					"titleNView": "false"
+				},
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "pages/study/study",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/my/my",
+			"style": {
+				"app-plus": {
+					"titleNView": "false"
 				}
 			}
+
+		}, {
+			"path": "pages/search/search",
+			"style": {
+				"app-plus": {
+					"titleNView": "false"
+				}
+			}
+
 		}
 	    ,{
-            "path" : "pages/study/study",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/my/my",
+            "path" : "pages/login/login",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -36,24 +51,22 @@
 	"tabBar": {
 		"selectedColor": "#000",
 		"color": "#bbbac7",
-		"list": [
-			{
-				"iconPath": "static/tabbar/index1.png",
-				"selectedIconPath": "static/tabbar/index1_selected.png",
-				"text": "首页",
-				"pagePath": "pages/index/index"
-			},{
-				"iconPath": "static/tabbar/learn.png",
-				"selectedIconPath": "static/tabbar/learn_selected.png",
-				"text": "学习",
-				"pagePath": "pages/study/study"
-			},{
-				"iconPath": "static/tabbar/home.png",
-				"selectedIconPath": "static/tabbar/home_selected.png",
-				"text": "我的",
-				"pagePath": "pages/my/my"
-			}
-		]
+		"list": [{
+			"iconPath": "static/tabbar/index1.png",
+			"selectedIconPath": "static/tabbar/index1_selected.png",
+			"text": "首页",
+			"pagePath": "pages/index/index"
+		}, {
+			"iconPath": "static/tabbar/learn.png",
+			"selectedIconPath": "static/tabbar/learn_selected.png",
+			"text": "学习",
+			"pagePath": "pages/study/study"
+		}, {
+			"iconPath": "static/tabbar/home.png",
+			"selectedIconPath": "static/tabbar/home_selected.png",
+			"text": "我的",
+			"pagePath": "pages/my/my"
+		}]
 	},
 	"uniIdRouter": {}
 }

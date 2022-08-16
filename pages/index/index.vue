@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<i-search></i-search>
+		<i-search @click='handleGoToSearch'></i-search>
 
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" circular>
 			<swiper-item v-for="(v,i) in bannerList" :key="i" class="px-2 s-item">
@@ -17,23 +17,8 @@
 			</view>
 		</view>
 
-		<view class="coupon">
-			<view class="coupon-content">
-				<view class="coupon-item mr-2" v-for="(v,index) in couponData" :key="index">
-					<view class="coupon-left">
-						<view class="price">
-							￥{{v.price}}
-						</view>
-						<view class="value">
-							{{v.value.title}}
-						</view>
-					</view>
-					<view class="coupon-right">
-						领取
-					</view>
-				</view>
-			</view>
-		</view>
+		<!-- 优惠券 -->
+		<i-coupon :data="couponData"></i-coupon>
 
 		<view class="group">
 			<view class="group-title">
@@ -42,7 +27,7 @@
 			<view class="group-item">
 				<view class="group-content" v-for="(v,i) in groupData" :key="i">
 					<view class="cover">
-						<image :src="v.cover" class="img" ></image>
+						<image :src="v.cover" class="img"></image>
 						<view class="type">
 							{{v.type==='column'?'专栏':''}}
 							{{v.type==='media'?'图文':''}}
@@ -64,7 +49,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="group-2">
 			<view class="group-title">
 				<view class="left">
@@ -77,7 +62,7 @@
 			<view class="group-item">
 				<view class="group-content" v-for="(v,i) in groupData2" :key="i">
 					<view class="cover">
-						<image :src="v.cover" class="img" ></image>
+						<image :src="v.cover" class="img"></image>
 						<view class="type">
 							{{v.type==='column'?'专栏':''}}
 							{{v.type==='media'?'图文':''}}
@@ -101,7 +86,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<image :src="imageAd" style="width:100%;height: 360rpx;"></image>
 	</view>
 </template>
@@ -119,8 +104,8 @@
 				iconsList: [],
 				couponData: [],
 				groupData: [],
-				groupData2:[],
-				imageAd:''
+				groupData2: [],
+				imageAd: ''
 			}
 		},
 		onLoad() {
@@ -128,36 +113,52 @@
 			this.handleGetCoupon()
 			this.handleGetGroup()
 		},
+		onPullDownRefresh() {
+			const res = this.render()
+			const res1 = this.handleGetCoupon()
+			const res2 = this.handleGetGroup()
+			if (res && res1 && res2) {
+				uni.stopPullDownRefresh()
+			}
+		},
 		methods: {
 			async render() {
 				const res = await getIndex()
 				// console.log(res);
 				this.bannerList = res.data[1].data
 				this.iconsList = res.data[2].data
-				this.groupData2=res.data[5].data
-				this.imageAd=res.data[6].data
+				this.groupData2 = res.data[5].data
+				this.imageAd = res.data[6].data
+				return res
 			},
 			async handleGetCoupon() {
 				const res = await getCoupon()
 				// console.log(res);
 				this.couponData = res.data
+				return res
 			},
 			async handleGetGroup() {
 				const res = await getGroup({
 					page: 1,
 					usable: 1
 				})
-				console.log(res);
+				// console.log(res);
 				this.groupData = res.data.rows
+				return res
+			},
+			// 跳转搜索页面
+			handleGoToSearch(){
+				this.$goTo.to('/pages/search/search')
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.content{
+	.content {
 		width: 100%;
 	}
+
 	.s-item {
 		box-sizing: border-box;
 	}
@@ -192,47 +193,6 @@
 		}
 	}
 
-	.coupon {
-		padding: 20rpx;
-		width: 100%;
-		box-sizing: border-box;
-
-		.coupon-content {
-			overflow-x: scroll;
-			display: flex;
-			width: 100%;
-
-			.coupon-item {
-				flex-shrink: 0;
-				display: flex;
-				width: 500rpx;
-				text-align: center;
-
-				.coupon-left {
-					background: #d39e00;
-					flex: 70%;
-					padding: 20rpx;
-					color: #fff;
-
-					.value {
-						font-size: 24rpx;
-						margin-top: 10rpx;
-					}
-				}
-
-				.coupon-right {
-					background: #ffc107;
-					flex: 30%;
-					border-left: 2px dashed #fff;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					color: #fff;
-				}
-			}
-		}
-
-	}
 
 	.group {
 		border-top: 20rpx solid #f5f5f3;
@@ -250,17 +210,20 @@
 			overflow-x: scroll;
 			display: flex;
 			flex-shrink: 0;
-			.group-content{
-				.cover{
+
+			.group-content {
+				.cover {
 					margin-bottom: 5px;
 					width: 340rpx;
 					height: 180rpx;
 					position: relative;
-					.img{
+
+					.img {
 						width: 100%;
 						height: 100%;
 					}
-					.type{
+
+					.type {
 						position: absolute;
 						bottom: 10rpx;
 						right: 10rpx;
@@ -270,13 +233,16 @@
 						font-size: 24rpx;
 					}
 				}
-				.price-content{
+
+				.price-content {
 					display: flex;
 					margin-top: 10rpx;
-					.price{
+
+					.price {
 						color: red;
 					}
-					.t_price{
+
+					.t_price {
 						color: #ccc;
 						font-size: 24rpx;
 					}
@@ -284,40 +250,46 @@
 			}
 		}
 	}
-	
+
 	.group-2 {
 		width: 100%;
 		padding: 30rpx 10rpx;
 		box-sizing: border-box;
 		border-bottom: 20rpx solid #f5f5f3;
-	
+
 		.group-title {
 			display: flex;
 			justify-content: space-between;
-			.left{
+
+			.left {
 				font-size: 40rpx;
 				font-weight: 800;
 			}
-			.right{
+
+			.right {
 				color: #ccc;
 				font-size: 24rpx;
 			}
 		}
-	
+
 		.group-item {
 			width: 100%;
-			.group-content{
+
+			.group-content {
 				display: flex;
-				.cover{
+
+				.cover {
 					margin-bottom: 5px;
 					width: 340rpx;
 					height: 180rpx;
 					position: relative;
-					.img{
+
+					.img {
 						width: 100%;
 						height: 100%;
 					}
-					.type{
+
+					.type {
 						position: absolute;
 						bottom: 10rpx;
 						right: 10rpx;
@@ -327,25 +299,30 @@
 						font-size: 24rpx;
 					}
 				}
-				.foot{
+
+				.foot {
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
 					margin-left: 20rpx;
-					.title{
+
+					.title {
 						width: 400rpx;
 						white-space: nowrap;
 						text-overflow: ellipsis;
 						overflow: hidden;
 					}
 				}
-				.price-content{
+
+				.price-content {
 					margin-top: 10rpx;
 					display: flex;
-					.price{
+
+					.price {
 						color: red;
 					}
-					.t_price{
+
+					.t_price {
 						color: #ccc;
 						font-size: 24rpx;
 					}
