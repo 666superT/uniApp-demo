@@ -30,21 +30,20 @@
 					"titleNView": "false"
 				}
 			}
-
 		}
 	    ,{
             "path" : "pages/login/login",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "app-plus": {
+                	"titleNView": "false"
+                }
             }
             
         }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},

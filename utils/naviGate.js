@@ -13,6 +13,9 @@ const tab = (url, option = {}) => {
 		})
 	}
 
+// function back(url, option = {}){
+// 	uni.navigateBack()
+// }
 export default {
 	to,
 	tab
