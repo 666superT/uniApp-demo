@@ -1,76 +1,43 @@
 <template>
 	<view class="content">
-		<i-search @click='handleGoToSearch'></i-search>
+		<my-skeleton v-if="!lodingStatus"></my-skeleton>
+		<block v-else>
+			<!-- 搜索框 -->
+			<i-search @click='handleGoToSearch'></i-search>
 
-		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" circular>
-			<swiper-item v-for="(v,i) in bannerList" :key="i" class="px-2 s-item">
-				<image :src="v.src" class="rounded banner-img"></image>
-			</swiper-item>
-		</swiper>
+			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" circular>
+				<swiper-item v-for="(v,i) in bannerList" :key="i" class="px-2 s-item">
+					<image :src="v.src" class="rounded banner-img"></image>
+				</swiper-item>
+			</swiper>
 
-		<view class="icons flex">
-			<view class="icons-item py-1" v-for="(v,i) in iconsList" :key="i">
-				<image :src="v.src" class="icons-img"></image>
-				<view class="title">
-					{{v.name}}
-				</view>
-			</view>
-		</view>
-
-		<!-- 优惠券 -->
-		<i-coupon :data="couponData"></i-coupon>
-
-		<view class="group">
-			<view class="group-title">
-				拼团
-			</view>
-			<view class="group-item">
-				<view class="group-content" v-for="(v,i) in groupData" :key="i">
-					<view class="cover">
-						<image :src="v.cover" class="img"></image>
-						<view class="type">
-							{{v.type==='column'?'专栏':''}}
-							{{v.type==='media'?'图文':''}}
-							{{v.type==='audio'?'音频':''}}
-							{{v.type==="video"?'视频':''}}
-						</view>
-					</view>
+			<view class="icons flex">
+				<view class="icons-item py-1" v-for="(v,i) in iconsList" :key="i">
+					<image :src="v.src" class="icons-img"></image>
 					<view class="title">
-						{{v.title}}
-					</view>
-					<view class="price-content">
-						<view class="price">
-							￥{{v.price}}
-						</view>
-						<view class="t_price">
-							￥{{v.t_price}}
-						</view>
+						{{v.name}}
 					</view>
 				</view>
 			</view>
-		</view>
 
-		<view class="group-2">
-			<view class="group-title">
-				<view class="left">
-					最新列表
+			<!-- 优惠券 -->
+			<i-coupon :data="couponData"></i-coupon>
+
+			<view class="group">
+				<view class="group-title">
+					拼团
 				</view>
-				<view class="right">
-					查看更多
-				</view>
-			</view>
-			<view class="group-item">
-				<view class="group-content" v-for="(v,i) in groupData2" :key="i">
-					<view class="cover">
-						<image :src="v.cover" class="img"></image>
-						<view class="type">
-							{{v.type==='column'?'专栏':''}}
-							{{v.type==='media'?'图文':''}}
-							{{v.type==='audio'?'音频':''}}
-							{{v.type==="video"?'视频':''}}
+				<view class="group-item">
+					<view class="group-content" v-for="(v,i) in groupData" :key="i">
+						<view class="cover">
+							<image :src="v.cover" class="img"></image>
+							<view class="type">
+								{{v.type==='column'?'专栏':''}}
+								{{v.type==='media'?'图文':''}}
+								{{v.type==='audio'?'音频':''}}
+								{{v.type==="video"?'视频':''}}
+							</view>
 						</view>
-					</view>
-					<view class="foot">
 						<view class="title">
 							{{v.title}}
 						</view>
@@ -85,9 +52,47 @@
 					</view>
 				</view>
 			</view>
-		</view>
 
-		<image :src="imageAd" style="width:100%;height: 360rpx;"></image>
+			<view class="group-2">
+				<view class="group-title">
+					<view class="left">
+						最新列表
+					</view>
+					<view class="right">
+						查看更多
+					</view>
+				</view>
+				<view class="group-item">
+					<view class="group-content" v-for="(v,i) in groupData2" :key="i">
+						<view class="cover">
+							<image :src="v.cover" class="img"></image>
+							<view class="type">
+								{{v.type==='column'?'专栏':''}}
+								{{v.type==='media'?'图文':''}}
+								{{v.type==='audio'?'音频':''}}
+								{{v.type==="video"?'视频':''}}
+							</view>
+						</view>
+						<view class="foot">
+							<view class="title">
+								{{v.title}}
+							</view>
+							<view class="price-content">
+								<view class="price">
+									￥{{v.price}}
+								</view>
+								<view class="t_price">
+									￥{{v.t_price}}
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+
+			<image :src="imageAd" style="width:100%;height: 360rpx;"></image>
+		</block>
+
 	</view>
 </template>
 
@@ -97,7 +102,11 @@
 		getCoupon,
 		getGroup
 	} from '@/api/index.js'
+	import mySkeleton from '@/pages/index/my-skeleton'
 	export default {
+		components: {
+			mySkeleton
+		},
 		data() {
 			return {
 				bannerList: [],
@@ -105,21 +114,32 @@
 				couponData: [],
 				groupData: [],
 				groupData2: [],
-				imageAd: ''
+				imageAd: '',
+				lodingStatus: false
 			}
 		},
 		onLoad() {
-			this.render()
-			this.handleGetCoupon()
-			this.handleGetGroup()
+			this.loder()
 		},
-		async onPullDownRefresh() {
-			await this.render()
-			await this.handleGetCoupon()
-			await this.handleGetGroup()
-			uni.stopPullDownRefresh()
+		onPullDownRefresh() {
+			this.loder()
 		},
 		methods: {
+			async loder() {
+				try {
+					await this.render()
+					this.lodingStatus = true
+					await this.handleGetCoupon()
+					await this.handleGetGroup()
+					uni.stopPullDownRefresh()
+				} catch (e) {
+					//TODO handle the exception
+					console.log(e);
+					uni.stopPullDownRefresh()
+				}
+
+			},
+
 			async render() {
 				const res = await getIndex()
 				// console.log(res);

@@ -33,8 +33,25 @@ class Http {
 
 	// 响应拦截器
 	static async _beforeResponse(res) {
-		console.log(res);
-		return res[1].data
+		const [error, response] = res
+
+		// console.log(response);
+		// 请求失败
+		if (response.statusCode !== 200 || response.data.msg === 'fail') {
+			Http._showErrMsg(response.statusCode, response.data.data)
+		}
+		return response.data
+	}
+
+	// 信息提示
+	static _showErrMsg(code, msg) {
+		let title = ''
+		title = msg || '发生错误'
+		uni.showToast({
+			title,
+			icon: 'none',
+			duration: 3000
+		})
 	}
 }
 
