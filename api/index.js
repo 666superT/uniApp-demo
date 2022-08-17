@@ -1,21 +1,21 @@
-import {
-	http
-} from '@/utils/request.js'
+import
+Http
+from '@/utils/request.js'
 
 function getIndex() {
-	return http({
+	return Http.request({
 		url: '/index'
 	})
 }
 
 function getCoupon() {
-	return http({
+	return Http.request({
 		url: '/coupon'
 	})
 }
 
 function getGroup(params) {
-	return http({
+	return Http.request({
 		url: '/group',
 		data: params
 	})

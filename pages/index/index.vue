@@ -113,13 +113,11 @@
 			this.handleGetCoupon()
 			this.handleGetGroup()
 		},
-		onPullDownRefresh() {
-			const res = this.render()
-			const res1 = this.handleGetCoupon()
-			const res2 = this.handleGetGroup()
-			if (res && res1 && res2) {
-				uni.stopPullDownRefresh()
-			}
+		async onPullDownRefresh() {
+			await this.render()
+			await this.handleGetCoupon()
+			await this.handleGetGroup()
+			uni.stopPullDownRefresh()
 		},
 		methods: {
 			async render() {
@@ -147,7 +145,7 @@
 				return res
 			},
 			// 跳转搜索页面
-			handleGoToSearch(){
+			handleGoToSearch() {
 				this.$goTo.to('/pages/search/search')
 			}
 		}

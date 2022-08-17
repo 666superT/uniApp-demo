@@ -33,7 +33,7 @@
 			return {
 				user: '',
 				pass: '',
-				checked:''
+				checked: ''
 			};
 		},
 		methods: {
@@ -78,12 +78,13 @@
 			border-radius: 50%;
 			border: 2rpx solid #5ccc84;
 		}
-		
-		.checkbox{
+
+		.checkbox {
 			width: 44rpx;
 			height: 44rpx;
 		}
-		.login-foot-text{
+
+		.login-foot-text {
 			font-size: 30rpx;
 			color: #a9a5a0;
 		}
