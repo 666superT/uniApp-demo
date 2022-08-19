@@ -22,7 +22,6 @@
 					"titleNView": "false"
 				}
 			}
-
 		}, {
 			"path": "pages/search/search",
 			"style": {
@@ -30,18 +29,26 @@
 					"titleNView": "false"
 				}
 			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"app-plus": {
+					"titleNView": "false"
+				}
+			}
+
+		}, {
+			"path": "pages/bindPhone/bindPhone",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": "false"
+				}
+			}
+
 		}
-	    ,{
-            "path" : "pages/login/login",
-            "style" :                                                                                    
-            {
-                "app-plus": {
-                	"titleNView": "false"
-                }
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarBackgroundColor": "#F8F8F8",

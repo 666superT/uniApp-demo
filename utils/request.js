@@ -2,11 +2,15 @@ import {
 	APIConfig
 } from '@/config/config'
 
+import store from '@/store/index'
+
 class Http {
 	// 请求拦截器
 	static async _beforeRquest(config) {
+		const token = store.state.token
 		config.header = {
-			appId: APIConfig.appId
+			appId: APIConfig.appId,
+			token
 		}
 		config.url = APIConfig.baseUrl + config.url
 		return config

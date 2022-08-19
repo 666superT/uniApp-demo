@@ -4,7 +4,7 @@
 			rightIcon="more-filled" title="我的"></uni-nav-bar>
 		<view class="animate__animated animate__heartBeat">
 			<view class="content bg-main">
-				<view class="login-body p-3 flex">
+				<view class="my-body p-3 flex">
 					<image src="#" class="avator"></image>
 					<view class="word ml-3">
 						<view class="title" @click="handleGoToLoginPage">
@@ -37,7 +37,7 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<!-- 优惠券 -->
 			<view class="px-3 mt-5">
 				<view class="item py-2 px-1 flex justify-between align-center">
@@ -76,7 +76,7 @@
 	export default {
 		data() {
 			return {
-				
+
 			}
 		},
 		methods: {
@@ -84,7 +84,7 @@
 				console.log(666);
 			},
 			// 去登录页面
-			handleGoToLoginPage(){
+			handleGoToLoginPage() {
 				this.$goTo.to('/pages/login/login')
 			}
 		}
@@ -96,7 +96,7 @@
 		height: 350rpx;
 		border-radius: 0 0 50px 50px;
 
-		.login-body {
+		.my-body {
 			box-sizing: border-box;
 
 			.avator {
@@ -124,7 +124,7 @@
 				// top: 0;
 				// width: 100%;
 				justify-content: space-around;
-				box-shadow: 0 1px 6px rgba(0, 0 ,0 ,.1);
+				box-shadow: 0 1px 6px rgba(0, 0, 0, .1);
 
 				.icon-item {
 					display: flex;

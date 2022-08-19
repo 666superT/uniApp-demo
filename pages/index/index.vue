@@ -5,11 +5,9 @@
 			<!-- 搜索框 -->
 			<i-search @click='handleGoToSearch'></i-search>
 
-			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" circular>
-				<swiper-item v-for="(v,i) in bannerList" :key="i" class="px-2 s-item">
-					<image :src="v.src" class="rounded banner-img"></image>
-				</swiper-item>
-			</swiper>
+			<!-- 轮播图 -->
+			<i-swiper :data="bannerList"></i-swiper>
+
 
 			<view class="icons flex">
 				<view class="icons-item py-1" v-for="(v,i) in iconsList" :key="i">
@@ -175,15 +173,6 @@
 <style lang="scss" scoped>
 	.content {
 		width: 100%;
-	}
-
-	.s-item {
-		box-sizing: border-box;
-	}
-
-	.banner-img {
-		width: 100%;
-		height: 100%;
 	}
 
 	.icons {

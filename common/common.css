@@ -1,10 +1,13 @@
-.bg-main{
+.bg-main {
 	background-color: rgb(92, 204, 132);
 }
-.text-main{
+
+.text-main {
 	color: rgb(92, 204, 132);
 }
 
-html,body,.container{
+html,
+body,
+.container {
 	height: 100%;
 }

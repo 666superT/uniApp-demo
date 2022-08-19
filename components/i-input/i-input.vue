@@ -3,6 +3,7 @@
 		<view class="input-body flex px-3 align-center rounded">
 			<uni-icons :type="icon" color="#000"></uni-icons>
 			<input :type="type" :placeholder="placeholder" :value="value" @input="handleInpEvent" class="ml-3">
+			<slot></slot>
 		</view>
 	</view>
 </template>
@@ -31,11 +32,11 @@
 		data() {
 			return {
 
-			};
+			}
 		},
-		methods:{
-			handleInpEvent(e){
-				this.$emit('input',e.target.value)
+		methods: {
+			handleInpEvent(e) {
+				this.$emit('input', e.target.value)
 			}
 		}
 	}
@@ -45,5 +46,6 @@
 	.input-body {
 		background: #f5f5f5;
 		height: 100rpx;
+		position: relative;
 	}
 </style>

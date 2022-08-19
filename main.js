@@ -1,4 +1,5 @@
 import App from './App'
+import store from '@/store/index'
 import goTo from '@/utils/naviGate'
 
 // #ifndef VUE3
@@ -7,7 +8,8 @@ import Vue from 'vue'
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
-	...App
+	...App,
+	store
 })
 
 Vue.prototype.$goTo = goTo
