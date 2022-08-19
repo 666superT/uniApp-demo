@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<uni-nav-bar :border="false" @clickRight="handleRightClick" backgroundColor="#5ccc84" color="#fff"
-			rightIcon="more-filled" title="我的"></uni-nav-bar>
+		<!-- 头部导航 -->
+		<i-navbar icon="more-filled" title="我的" color="#fff"></i-navbar>
 		<view class="animate__animated animate__heartBeat">
 			<view class="content bg-main">
 				<view class="my-body p-3 flex">
@@ -42,7 +42,7 @@
 			<view class="px-3 mt-5">
 				<view class="item py-2 px-1 flex justify-between align-center">
 					<view class="left flex align-center">
-						<uni-icons type="contact" size="30" color="#5fa5ee"></uni-icons>
+						<i-icon icon="icon-pintuan" color="#5fa5ee" size="30"></i-icon>
 						<view class="ml-2">我的优惠券</view>
 					</view>
 					<view class="right">
